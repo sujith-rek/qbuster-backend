@@ -1,4 +1,4 @@
-import { Controller, Get, Post } from '@nestjs/common';
+import { Controller, Get, Post,HttpCode, HttpStatus } from '@nestjs/common';
 import { AppService } from './app.service';
 import { ShopService } from './services/shop/shop.service';
 
@@ -13,6 +13,7 @@ export class AppController {
     return this.appService.getHello();
   }
 
+  @HttpCode(HttpStatus.OK)
   @Post('/post_payment')
   postPayment(): Promise<String | null> {
     const data = {
@@ -22,6 +23,7 @@ export class AppController {
     return this.shopService.postPayment(data);
   }
 
+  @HttpCode(HttpStatus.OK)
   @Post('/verify_payment')
   verifyPayment(): Promise<String | null> {
     const data = {
