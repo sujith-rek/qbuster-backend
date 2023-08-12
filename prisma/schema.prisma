@@ -11,12 +11,12 @@ datasource db {
 }
 
 model Reciept {
-  orderId     Int      @id
+  orderId     String   @id
+  userId      String
+  shopId      Int
   orderDate   DateTime
   orderTotal  Float
-  orderStatus Boolean
-  shopId      Int
-  userId      String
+  orderStatus Boolean  @default(false)
   shop        Shop     @relation(fields: [shopId], references: [id])
   user        User     @relation(fields: [userId], references: [id])
 }
@@ -33,5 +33,6 @@ model User {
   name    String
   email   String
   phone   Int
+  coins   Int
   Reciept Reciept[]
 }
