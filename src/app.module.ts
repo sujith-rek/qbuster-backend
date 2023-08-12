@@ -6,6 +6,7 @@ import { JwtModule, JwtSecretRequestType } from '@nestjs/jwt';
 import { JwtConstants } from './constants';
 import { ShopService } from './services/shop/shop.service';
 import { PrismaService } from './services/prisma/prisma.service';
+import { CRUDService } from './shop/crud.service';
 
 @Module({
   imports: [ShopModule, JwtModule.register({
@@ -18,6 +19,6 @@ import { PrismaService } from './services/prisma/prisma.service';
     }
   }),],
   controllers: [AppController],
-  providers: [AppService, ShopService, PrismaService],
+  providers: [AppService, ShopService, PrismaService, CRUDService],
 })
 export class AppModule { }

@@ -38,4 +38,16 @@ export class AppController {
     return this.shopService.verifyPayment(data);
   }
 
+  @HttpCode(HttpStatus.OK)
+  @Post('/user')
+  createUser(@Body() TransactionDto: Record<string, any>){
+    return this.shopService.createUser(TransactionDto);
+  }
+
+  @HttpCode(HttpStatus.OK)
+  @Post('/shop')
+  createShop(@Body() TransactionDto: Record<string, any>){
+    return this.shopService.createShop(TransactionDto);
+  }
+
 }

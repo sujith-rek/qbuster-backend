@@ -57,10 +57,15 @@ export class CRUDService {
             where: { orderId: orderId },
         });
         if (!reciept) {
+            if(reciept.orderStatus == false){
+                return true;
+            }
             return false;
         }
-        return reciept;
+        return false;
     }
+
+    
 
     
 
