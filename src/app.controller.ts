@@ -1,6 +1,8 @@
-import { Controller, Get, Post,HttpCode, HttpStatus } from '@nestjs/common';
+import { Controller, Get, Post,HttpCode, HttpStatus, Body } from '@nestjs/common';
 import { AppService } from './app.service';
 import { ShopService } from './services/shop/shop.service';
+import { RecieptGuard } from './shop.guard';
+import { UseGuards } from '@nestjs/common';
 
 @Controller()
 export class AppController {
@@ -15,7 +17,8 @@ export class AppController {
 
   @HttpCode(HttpStatus.OK)
   @Post('/post_payment')
-  postPayment(): Promise<String | null> {
+  postPayment(@Body() TransactionDto: Record<string, any>): Promise<String | null> {
+    console.log(TransactionDto)
     const data = {
       "amount": 100,
       "currency": "NGN",
@@ -24,8 +27,10 @@ export class AppController {
   }
 
   @HttpCode(HttpStatus.OK)
+  @UseGuards(RecieptGuard)
   @Post('/verify_payment')
-  verifyPayment(): Promise<String | null> {
+  verifyPayment(@Body() TransactionDto: Record<string, any>): Promise<String | null> {
+    console.log(TransactionDto)
     const data = {
       "amount": 100,
       "currency": "NGN",

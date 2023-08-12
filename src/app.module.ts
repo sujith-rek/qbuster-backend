@@ -8,16 +8,16 @@ import { ShopService } from './services/shop/shop.service';
 import { PrismaService } from './services/prisma/prisma.service';
 
 @Module({
-  imports: [ShopModule,JwtModule.register({
+  imports: [ShopModule, JwtModule.register({
     secret: JwtConstants.secret,
     signOptions: { expiresIn: '60s' },
     secretOrKeyProvider: (
       requestType: JwtSecretRequestType,
-    )=>{
+    ) => {
       return JwtConstants.secret;
     }
   }),],
   controllers: [AppController],
-  providers: [AppService,ShopService,PrismaService],
+  providers: [AppService, ShopService, PrismaService],
 })
-export class AppModule {}
+export class AppModule { }
