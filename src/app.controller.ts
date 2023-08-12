@@ -18,24 +18,17 @@ export class AppController {
   @HttpCode(HttpStatus.OK)
   @Post('/post_payment')
   postPayment(@Body() TransactionDto: Record<string, any>): Promise<String | null> {
-    console.log(TransactionDto)
-    const data = {
-      "amount": 100,
-      "currency": "NGN",
-    }
-    return this.shopService.postPayment(data);
+    const prms = this.shopService.postPayment(TransactionDto);
+    console.log(prms)
+    return prms;
   }
 
   @HttpCode(HttpStatus.OK)
   @UseGuards(RecieptGuard)
   @Post('/verify_payment')
   verifyPayment(@Body() TransactionDto: Record<string, any>): Promise<String | null> {
-    console.log(TransactionDto)
-    const data = {
-      "amount": 100,
-      "currency": "NGN",
-    }
-    return this.shopService.verifyPayment(data);
+    console.log(TransactionDto);
+    return this.shopService.verifyPayment(TransactionDto);
   }
 
   @HttpCode(HttpStatus.OK)

@@ -1,5 +1,4 @@
 import { Injectable } from '@nestjs/common';
-import { PrismaService } from '../prisma/prisma.service';
 import { JwtService } from '@nestjs/jwt';
 import { CRUDService } from 'src/shop/crud.service';
 import { Reciept } from 'src/shop/crud.service';
@@ -8,7 +7,6 @@ import { HttpStatus } from '@nestjs/common';
 @Injectable()
 export class ShopService {
     constructor(
-        private prisma: PrismaService,
         private jwtService: JwtService,
         private crudService: CRUDService
     ) { }
@@ -18,8 +16,8 @@ export class ShopService {
             orderId: data.orderId,
             userId: data.userId,
             shopId: data.shopId,
-            orderDate: data.orderDate,
-            orderStatus: data.orderStatus,
+            orderDate: new Date(),
+            orderStatus: false,
             orderTotal: data.orderTotal,
         }
 
@@ -32,7 +30,14 @@ export class ShopService {
                 orderDate: res.orderDate,
                 orderTotal: res.orderTotal,
             }
-            return this.jwtService.signAsync(payload, { expiresIn: '3600s' });
+            const jwt = this.jwtService.signAsync(payload);
+            console.log(jwt, jwt.then((res) => {
+                console.log(res);
+            }).catch((err) => {
+                console.log(err);
+            }
+            ));
+            return jwt;
         }).catch((err) => {
             console.log(err);
             return null;
@@ -45,6 +50,10 @@ export class ShopService {
     }
 
     verifyPayment(data: any): Promise<String | null> {
+
+        console.log(data);
+        if(this.crudService.findUserById(data.userId))
+        if(this.crudService.findShopById(data.shopId))
         
 
         return null;
@@ -86,7 +95,7 @@ export class ShopService {
         )
         return null;
     }
-    
+
 
 
 }
