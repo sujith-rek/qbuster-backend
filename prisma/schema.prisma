@@ -9,3 +9,17 @@ datasource db {
   provider = "sqlite"
   url      = env("DATABASE_URL")
 }
+
+model Reciept{
+  orderId Int @id 
+  orderDate DateTime
+  orderTotal Float
+  orderStatus Boolean
+  shopId Int
+}
+
+model Shop{
+  id Int @id
+  name String
+  address String
+}
