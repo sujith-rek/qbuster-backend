@@ -1,26 +1,19 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
+import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
 export class ShopService {
-    constructor(private prisma: PrismaService) {}
+    constructor(private prisma: PrismaService, private jwtService: JwtService) { }
 
-    postPayment(data: any) : Promise<String | null>{
+    postPayment(data: any): Promise<String | null> {
         const str = "Meow"
-        return new Promise((resolve, reject) => {
-            resolve(str)
-        }
-        );
+        return this.jwtService.signAsync({ str });
     }
 
-    verifyPayment(data: any) : Promise<String | null>{
+    verifyPayment(data: any): Promise<String | null> {
         const str = "Meow"
-        return new Promise((resolve, reject) => {
-            resolve(str)
-        }
-        );
+        return this.jwtService.signAsync({ str });
     }
-
-    
 
 }
