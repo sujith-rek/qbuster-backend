@@ -10,16 +10,28 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Reciept{
-  orderId Int @id 
-  orderDate DateTime
-  orderTotal Float
+model Reciept {
+  orderId     Int      @id
+  orderDate   DateTime
+  orderTotal  Float
   orderStatus Boolean
-  shopId Int
+  shopId      Int
+  userId      String
+  shop        Shop     @relation(fields: [shopId], references: [id])
+  user        User     @relation(fields: [userId], references: [id])
 }
 
-model Shop{
-  id Int @id
-  name String
+model Shop {
+  id      Int       @id
+  name    String
   address String
+  Reciept Reciept[]
+}
+
+model User {
+  id      String    @id
+  name    String
+  email   String
+  phone   Int
+  Reciept Reciept[]
 }
