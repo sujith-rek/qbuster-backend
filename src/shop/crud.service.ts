@@ -18,6 +18,13 @@ export class CRUDService {
         return await this.prisma.reciept.create({ data });
     }
 
+    async updateReciept(orderId: string) {
+        return await this.prisma.reciept.update({
+            where: { orderId: orderId },
+            data: { orderStatus: true },
+        });
+    }
+
     async findUserById(id: string) {
         const user = await this.prisma.user.findUnique({
             where: { id: id },
