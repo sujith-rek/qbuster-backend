@@ -14,7 +14,6 @@ export class CRUDService {
     }
 
     async createReciept(data: Reciept) {
-        
         return await this.prisma.reciept.create({ data });
     }
 
@@ -29,9 +28,9 @@ export class CRUDService {
         const user = await this.prisma.user.findUnique({
             where: { id: id },
         });
-        if (!user) {
+        if (!user)
             return false;
-        }
+
         return true;
     }
 
@@ -39,9 +38,9 @@ export class CRUDService {
         const shop = await this.prisma.shop.findUnique({
             where: { id: id },
         });
-        if (!shop) {
+        if (!shop)
             return false;
-        }
+
         return true;
     }
 
@@ -64,18 +63,13 @@ export class CRUDService {
             where: { orderId: orderId },
         });
         if (!reciept) {
-            if(reciept.orderStatus == false){
+            if (reciept.orderStatus == false)
                 return true;
-            }
+
             return false;
         }
         return false;
     }
-
-    
-
-    
-
 
 }
 
