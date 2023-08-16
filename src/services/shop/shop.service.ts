@@ -54,6 +54,15 @@ export class ShopService {
         console.log(data);
         if(this.crudService.findUserById(data.userId))
         if(this.crudService.findShopById(data.shopId))
+        if(this.crudService.findRecieptById(data.orderId))
+        this.crudService.updateReciept(data.orderId).then((res) => {
+            console.log(res);
+            return HttpStatus.OK;
+        }).catch((err) => {
+            console.log(err);
+
+        }
+        )
         
 
         return null;
