@@ -35,14 +35,12 @@ export class ShopService {
                 console.log(res);
             }).catch((err) => {
                 console.log(err);
-            }
-            ));
+            }));
             return jwt;
         }).catch((err) => {
             console.log(err);
             return null;
-        }
-        )
+        })
 
         return null;
 
@@ -52,18 +50,16 @@ export class ShopService {
     verifyPayment(data: any): Promise<String | null> {
 
         console.log(data);
-        if(this.crudService.findUserById(data.userId))
-        if(this.crudService.findShopById(data.shopId))
-        if(this.crudService.findRecieptById(data.orderId))
-        this.crudService.updateReciept(data.orderId).then((res) => {
-            console.log(res);
-            return HttpStatus.OK;
-        }).catch((err) => {
-            console.log(err);
+        if (this.crudService.findUserById(data.userId))
+            if (this.crudService.findShopById(data.shopId))
+                if (this.crudService.findRecieptById(data.orderId))
+                    this.crudService.updateReciept(data.orderId).then((res) => {
+                        console.log(res);
+                        return HttpStatus.OK;
+                    }).catch((err) => {
+                        console.log(err);
+                    })
 
-        }
-        )
-        
 
         return null;
     }
@@ -74,16 +70,13 @@ export class ShopService {
                 data.coins = 0;
                 this.crudService.createUser(data).then((res) => {
                     return HttpStatus.OK;
-
                 }).catch((err) => {
                     console.log(err);
-                }
-                )
+                })
             }
         }).catch((err) => {
             console.log(err);
-        }
-        )
+        })
         return null;
     }
 
@@ -92,19 +85,14 @@ export class ShopService {
             if (res == null || res == undefined || res == false) {
                 this.crudService.createShop(data).then((res) => {
                     return HttpStatus.OK;
-
                 }).catch((err) => {
                     console.log(err);
-                }
-                )
+                })
             }
         }).catch((err) => {
             console.log(err);
-        }
-        )
+        })
         return null;
     }
-
-
 
 }
